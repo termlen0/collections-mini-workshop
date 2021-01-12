@@ -1,0 +1,8 @@
+---
+- name: Install NGINX on node1
+  hosts: node2
+  become: yes
+  tasks:
+    - name: Install nginx
+      include_role:
+        name: nginxinc.nginx_core.nginx

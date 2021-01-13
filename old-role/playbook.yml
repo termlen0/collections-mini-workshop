@@ -1,0 +1,10 @@
+---
+- name: Configure the webservers
+  hosts: node[2:3]
+  become: yes
+  gather_facts: no
+  tasks:
+    - include_role:
+        name: firewall
+    - include_role:
+        name: apache_vhost

@@ -5,14 +5,14 @@ understanding of working with Ansible collections.
 ## Pre-reqs:
 - The user is familiar with Ansible and Ansible roles
 - An environment with Ansible 2.9 and Ansible Tower 3.7 or greater installed
-- A github account
+- A github account (for section 3 onward)
 
 ### SECTION 1: Using a community collection from the command line
 
 In this section you will learn how to use a collection from the
 upstream Ansible Galaxy collection repository
 
-##### STEP1: Create the necessary directory
+##### STEP 1: Create the necessary directory
 
 Create a *demo-collection* directory in your home directory
 
@@ -26,9 +26,9 @@ This will be the base directory to build a playbook that uses an
 upstream collection.
 
 
-##### STEP3: Download the nginx collection
+##### STEP 2: Download the nginx collection
 
-Navigate to https://galaxy.ansible.com and search of nginx. You should
+Navigate to https://galaxy.ansible.com and search for nginx. You should
 see a result like:
 
 ![Alt Text](images/galaxy_nginx.png )
@@ -36,7 +36,7 @@ see a result like:
 We will use the **nginx_core** collection. Click on it and review the
 contents.
 
-##### STEP4: Install the collection
+##### STEP 3: Install the collection
 
 The collection info page shows how to install the collection:
 
@@ -55,7 +55,7 @@ Installing 'nginxinc.nginx_core:0.3.0' to '/home/student1/.ansible/collections/a
 > NOTE: Note that the collection has been installed by default into
 > the $HOME/.ansible path
 
-##### STEP5: Use the downloaded collection
+##### STEP 4: Use the downloaded collection
 
 Collections are invoked by providing a FQCN (Fully Qualified
 Collection Name) while accessing it from your playbook.
@@ -64,7 +64,14 @@ Create a playbook called *install_nginx.yml* to invoke the task from
 the collection.
 
 ``` yaml
-
+---
+- name: Install NGINX on node1
+  hosts: node1
+  become: yes
+  tasks:
+    - name: Install nginx
+      include_role:
+        name: nginxinc.nginx_core.nginx
 ```
 
 
@@ -142,7 +149,7 @@ In this section, we'll see how easy it is to use this playbook
 from Ansible Tower.
 
 
-##### STEP1: Galaxy Settings
+##### STEP 1: Galaxy Settings
 Review the Galaxy configuration in Tower. Login as an admin into Tower
 and Navigate to *Jobs>Settings* on your Tower.
 
@@ -153,7 +160,7 @@ and Navigate to *Jobs>Settings* on your Tower.
 > automation hub settings
 
 
-##### STEP2: Review the source code for the Ansible Tower Project
+##### STEP 2: Review the source code for the Ansible Tower Project
 
 Navigate to
 https://github.com/termlen0/collections-mini-workshop
@@ -175,7 +182,7 @@ collections:
 > needed for the execution of our playbook.
 
 
-##### STEP3: Create the Ansible Tower Project and Job Template
+##### STEP 3: Create the Ansible Tower Project and Job Template
 
 **Project**
 
@@ -185,7 +192,7 @@ collections:
 **Job Template**
 ![Alt Text](images/tower_jt.png)
 
-##### STEP4: Launch the Job Template
+##### STEP 4: Launch the Job Template
 
 Launch the job template. You should see the familiar playbook output:
 
@@ -197,4 +204,4 @@ Launch the job template. You should see the familiar playbook output:
 
 ### SECTION 3: Migrating your existing role(s) as a collection
 
-[TODO](./todo.md)
+[Migrating existing roles as collections](./migrate_roles.md)

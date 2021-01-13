@@ -1,0 +1,27 @@
+---
+- name: Ensure that the httpd service is already running
+  service:
+    name: httpd
+    state: started
+    enabled: true
+
+- name: ensure vhost directory is present
+  file:
+    path: "/var/www/vhosts/{{ ansible_hostname }}"
+    state: directory
+    recursive: yes
+
+- name: Generate the vhost configuration
+  template:
+    src: vhost.conf.j2
+    dest: /etc/httpd/conf.d/vhost.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Generate the html page
+  template:
+    src: index.html.j2
+    dest: "/var/www/vhosts/{{ inventory_hostname }}/index.html"
+  notify:
+    - restart apache

@@ -1,0 +1,9 @@
+- name: Ensure that firewalld is installed
+  yum:
+    name: firewalld
+    state: installed
+- name: Ensure that firewalld is running
+  service:
+    name: firewalld
+    state: started
+    enabled: yes

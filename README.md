@@ -156,6 +156,30 @@ and Navigate to *Jobs>Settings* on your Tower.
 ##### STEP2: Review the source code for the Ansible Tower Project
 
 Navigate to
+https://github.com/termlen0/collections-mini-workshop/tree/main/community-collection-demo.
+
+Review the playbook here. You will notice that the playbook is
+identical to the one we ran earlier - except that it will run against
+node2 now.
+
+Also new is the **collections** directory. Open the *requirements.yml*
+file within this directory:
+
+``` yaml
+collections:
+  - name: nginxinc.nginx_core
+    source: https://galaxy.ansible.com
+```
+
+> Tower will parse this file and install the necessary collections
+> needed for the execution of our playbook.
+
+
+##### STEP3: Create the Ansible Tower Project and Job Template
+
+![Alt Text](images/tower_project.png )
+
+
 
 
 
